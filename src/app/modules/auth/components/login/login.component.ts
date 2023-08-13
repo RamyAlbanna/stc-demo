@@ -10,7 +10,6 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  // dependencies
   private readonly _router = inject(Router);
   private readonly _toaster = inject(ToastrService);
 
@@ -29,21 +28,32 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin = () => {
-    if (!this.isUserValid()) return;
+    if (!this.isUserValid()) {
+      this._toaster.error("Invalid Credintials!", "", { timeOut: 2000 });
+      return;
+    }
     this.navigateDependsOnRole();
-    this._toaster.success("User Successfully Logged in!");
+    this._toaster.success("User Successfully Logged in!", "", {
+      timeOut: 2000,
+    });
   };
 
   getFormControl = (controlName: string): FormControl =>
     this.loginForm.controls[controlName] as FormControl;
 
   isUserValid = () =>
-    this.getFormControl("userName" && "password")?.value === "admin" ||
-    this.getFormControl("userName" && "password")?.value === "user";
+    (this.getFormControl("userName")?.value === "admin" &&
+      this.getFormControl("password")?.value === "admin") ||
+    (this.getFormControl("userName")?.value === "user" &&
+      this.getFormControl("password")?.value === "user");
 
   navigateDependsOnRole = () => {
-    if (this.getFormControl("userName")?.value === "admin")
+    if (this.getFormControl("userName")?.value === "admin") {
+      localStorage.setItem("role", "admin");
       this._router.navigate(["admin"]);
-    else this._router.navigate([""]);
+    } else {
+      localStorage.setItem("role", "user");
+      this._router.navigate([""]);
+    }
   };
 }

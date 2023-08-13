@@ -12,10 +12,8 @@ import { CartModel } from "src/app/core/models/carts.model";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  // dependencies
-  private readonly _router = inject(Router);
-  private readonly _toaster = inject(ToastrService);
   private readonly _cartsService = inject(CartsService);
+  private readonly _router = inject(Router);
 
   subscription: Subscription = new Subscription();
   cartData!: CartModel;
@@ -25,8 +23,12 @@ export class HeaderComponent implements OnInit {
   }
 
   setCartData = () => {
-    this._cartsService.cartData$.subscribe({
+    this._cartsService.cartDataSubject$.subscribe({
       next: (cart: CartModel) => (this.cartData = cart),
     });
+  };
+
+  onSignIn = () => {
+    this._router.navigate(["auth"]);
   };
 }

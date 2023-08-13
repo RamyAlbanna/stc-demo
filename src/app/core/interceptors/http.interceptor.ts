@@ -30,7 +30,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         return event;
       }),
       catchError((error: HttpErrorResponse) => {
-        if (!error?.ok) this._toasterService.error(error?.message);
+        if (!error?.ok)
+          this._toasterService.error(error?.message), "", { timeOut: 2000 };
         return throwError(() => error);
       }),
       finalize(() => {

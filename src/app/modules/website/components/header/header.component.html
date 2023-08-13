@@ -1,17 +1,21 @@
-<header id="sticky-menu" class="header header-2">
+<header class="header header-2 position-relative">
   <div class="header-area">
     <div class="container-fluid">
+      <button class="login-btn btn btn-primary" (click)="onSignIn()">
+        Sign in
+      </button>
       <div class="row">
         <div class="col-md-4 offset-md-4 col-7">
           <div class="logo text-md-center">
             <h2>Demo</h2>
           </div>
         </div>
+
         <div class="col-md-4 col-5">
           <div class="mini-cart text-end">
             <ul>
               <li>
-                <a class="cart-icon" href="#">
+                <a class="cart-icon">
                   <img
                     src="assets/img/cart/shopping-cart.png"
                     width="30px"
@@ -22,48 +26,31 @@
                 </a>
                 <div class="mini-cart-brief text-left">
                   <div class="all-cart-product clearfix">
-                    <div class="single-cart clearfix">
+                    <div
+                      class="single-cart clearfix"
+                      *ngFor="let cartProduct of cartData?.products"
+                    >
                       <div class="cart-photo">
-                        <a href="#"><img src="img/cart/1.jpg" alt="" /></a>
+                        <img [src]="cartProduct?.image" alt="" />
                       </div>
                       <div class="cart-info">
-                        <h5><a href="#">dummy product name</a></h5>
-                        <p class="mb-0">Price : $ 100.00</p>
-                        <p class="mb-0">Qty : 02</p>
-                        <span class="cart-delete"
-                          ><a href="#"><i class="zmdi zmdi-close"></i></a
-                        ></span>
-                      </div>
-                    </div>
-                    <div class="single-cart clearfix">
-                      <div class="cart-photo">
-                        <a href="#"><img src="img/cart/2.jpg" alt="" /></a>
-                      </div>
-                      <div class="cart-info">
-                        <h5><a href="#">dummy product name</a></h5>
-                        <p class="mb-0">Price : $ 300.00</p>
-                        <p class="mb-0">Qty : 01</p>
-                        <span class="cart-delete"
-                          ><a href="#"><i class="zmdi zmdi-close"></i></a
-                        ></span>
+                        <h5>{{ cartProduct?.title | slice : 0 : 15 }}</h5>
+                        <p class="mb-0">
+                          Price : {{ cartProduct?.price | currency }}
+                        </p>
+                        <p class="mb-0">{{ cartProduct?.qty }}</p>
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="cart-totals d-flex justify-content-between align-content-center"
-                  >
-                    <h5 class="mb-0 mt-3">
-                      Total
-                      <span class="floatright">{{
-                        cartData?.totalPrice | currency
-                      }}</span>
+
+                  <div class="cart-totals text-center">
+                    <h5 class="mb-0" *ngIf="!cartData?.products?.length">
+                      <span>There is no items yet!</span>
                     </h5>
-                    <a
-                      href="cart.html"
-                      class="button-one floatleft text-uppercase"
-                      data-text="View cart"
-                      >View cart</a
-                    >
+                    <h5 class="mb-0 mt-3">
+                      Total:
+                      <span>{{ cartData?.totalPrice | currency }}</span>
+                    </h5>
                   </div>
                 </div>
               </li>

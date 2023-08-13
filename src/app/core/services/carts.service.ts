@@ -7,7 +7,8 @@ import { BehaviorSubject, Observable, Subject } from "rxjs";
 })
 export class CartsService {
   cartData!: CartModel;
-  cartData$: Subject<CartModel> = new BehaviorSubject<CartModel>({
+
+  cartDataSubject$: Subject<CartModel> = new BehaviorSubject<CartModel>({
     id: 1,
     products: [],
     totalPrice: 0,
@@ -19,12 +20,12 @@ export class CartsService {
   }
 
   setCartData = () => {
-    this.cartData$.subscribe({
+    this.cartDataSubject$.subscribe({
       next: (cart: CartModel) => (this.cartData = cart),
     });
   };
 
   addToCart = (cart: CartModel): void => {
-    this.cartData$.next(cart);
+    this.cartDataSubject$.next(cart);
   };
 }

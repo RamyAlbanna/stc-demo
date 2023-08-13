@@ -7,7 +7,7 @@
 
 :root {
   --primaryColor: #c8a165;
-  --primaryColorDark: #ac8549;
+  --primaryColorDark: #855b1c;
 }
 
 html,
@@ -20,6 +20,19 @@ body {
   a:active,
   a:link {
     text-decoration: none;
+  }
+  .btn {
+    border-radius: 8px;
+  }
+  .btn-primary {
+    background-color: var(--primaryColor) !important;
+    border-color: var(--primaryColor);
+
+    &:hover,
+    :active {
+      background-color: var(--primaryColorDark);
+      border-color: var(--primaryColorDark);
+    }
   }
 }
 
@@ -49,30 +62,9 @@ form {
   }
 }
 
-.admin-wrapper {
-  background: #f6f6f6;
-
-  .header-wrapper {
-    .top_bar {
-      background: #fff !important;
-      box-shadow: 0 0 15px #e4e4e4;
-    }
-  }
-
-  .btn {
-    border-radius: 8px;
-  }
-
-  // c8a165
-
-  .btn-primary {
-    background-color: var(--primaryColor);
-    border-color: var(--primaryColor);
-
-    &:hover,
-    :active {
-      background-color: var(--primaryColorDark);
-      border-color: var(--primaryColorDark);
-    }
+.header-wrapper {
+  .top_bar {
+    background: #fff !important;
+    box-shadow: 0 0 15px #e4e4e4;
   }
 }

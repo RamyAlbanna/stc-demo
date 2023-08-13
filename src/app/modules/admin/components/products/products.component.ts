@@ -46,7 +46,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.dataSource = this.dataSource.filter(
             (row) => row.id !== response.id
           );
-          this._toaster.success("Product Deleted Successfully!");
+          this._toaster.success("Product Deleted Successfully!", "", {
+            timeOut: 2000,
+          });
         },
       })
     );

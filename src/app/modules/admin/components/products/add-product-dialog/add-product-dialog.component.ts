@@ -33,7 +33,9 @@ export class AddProductDialogComponent {
     this._subscription.add(
       this._productsService.add(this.addProuctForm.value).subscribe(() => {
         this._dialogRef.close();
-        this._toaster.success("Product Added Successfully!");
+        this._toaster.success("Product Added Successfully!", "", {
+          timeOut: 2000,
+        });
       })
     );
   };

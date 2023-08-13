@@ -5,5 +5,5 @@ export type CartModel = {
   date?: string | undefined;
   totalPrice: number;
   totalQty: number;
-  products: ProductModel[] | [];
+  products: ProductModel[];
 };

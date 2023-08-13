@@ -51,9 +51,13 @@
               </button>
 
               <div class="quantity-wrapper d-flex ms-3">
-                <a href="#" class="plus btn btn-primary"> + </a>
+                <button (click)="onAddOne()" class="plus btn btn-primary">
+                  +
+                </button>
                 <input [formControl]="qty" class="quantity" type="number" />
-                <a href="#" class="muines btn btn-primary"> - </a>
+                <button (click)="onRemoveOne()" class="muines btn btn-primary">
+                  -
+                </button>
               </div>
             </div>
           </div>
