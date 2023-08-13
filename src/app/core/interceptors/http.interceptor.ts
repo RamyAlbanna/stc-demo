@@ -20,11 +20,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
   intercept(request: any, next: HttpHandler): Observable<HttpEvent<any>> {
     this._loadingService.showSpinner();
-    let headers: HttpHeaders = new HttpHeaders({
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    });
-    const newRequest = request.clone(headers);
+    const newRequest = request.clone();
     return next.handle(newRequest).pipe(
       map((event: HttpEvent<any>) => {
         return event;

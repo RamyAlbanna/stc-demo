@@ -12,13 +12,16 @@ import { ProductsService } from "src/app/core/services/products.service";
   styleUrls: ["./shop.component.scss"],
 })
 export class ShopComponent implements OnInit, OnDestroy {
-  private readonly _productsService = inject(ProductsService);
-  private readonly _categoriesService = inject(CategoriesService);
-  private readonly _router = inject(Router);
-  private readonly _toaster = inject(ToastrService);
   private _subscription: Subscription = new Subscription();
   categoriesList!: string[];
   productsList!: ProductModel[];
+
+  constructor(
+    private readonly _productsService: ProductsService,
+    private readonly _categoriesService: CategoriesService,
+    private readonly _router: Router,
+    private readonly _toaster: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.setCategories();
@@ -27,7 +30,7 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   setProductsList = () =>
     this._subscription.add(
-      this._productsService.getAll().subscribe({
+      this._productsService.getAllProducts().subscribe({
         next: (response) => {
           this.productsList = response;
         },
@@ -36,7 +39,7 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   setCategories = () =>
     this._subscription.add(
-      this._categoriesService.getAll().subscribe({
+      this._categoriesService.getAllCategories().subscribe({
         next: (response) => {
           this.categoriesList = response;
           this.categoriesList.unshift("all");
@@ -50,7 +53,7 @@ export class ShopComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this._productsService.getAllByCategory(category).subscribe({
+    this._productsService.getAllProductsByCategory(category).subscribe({
       next: (response) => {
         this.productsList = response;
       },

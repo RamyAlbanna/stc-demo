@@ -1,8 +1,8 @@
 <header class="header header-2 position-relative">
   <div class="header-area">
     <div class="container-fluid">
-      <button class="login-btn btn btn-primary" (click)="onSignIn()">
-        Sign in
+      <button class="login-btn btn btn-primary" (click)="onSignInOrOut()">
+        {{ _usersService.isUserSignedIn() ? "Sign out" : "Sign in" }}
       </button>
       <div class="row">
         <div class="col-md-4 offset-md-4 col-7">

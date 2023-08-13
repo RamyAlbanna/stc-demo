@@ -41,13 +41,16 @@ export class LoginComponent implements OnInit {
   getFormControl = (controlName: string): FormControl =>
     this.loginForm.controls[controlName] as FormControl;
 
-  isUserValid = () =>
-    (this.getFormControl("userName")?.value === "admin" &&
-      this.getFormControl("password")?.value === "admin") ||
-    (this.getFormControl("userName")?.value === "user" &&
-      this.getFormControl("password")?.value === "user");
+  isUserValid() {
+    return (
+      (this.getFormControl("userName")?.value === "admin" &&
+        this.getFormControl("password")?.value === "admin") ||
+      (this.getFormControl("userName")?.value === "user" &&
+        this.getFormControl("password")?.value === "user")
+    );
+  }
 
-  navigateDependsOnRole = () => {
+  navigateDependsOnRole() {
     if (this.getFormControl("userName")?.value === "admin") {
       localStorage.setItem("role", "admin");
       this._router.navigate(["admin"]);
@@ -55,5 +58,5 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("role", "user");
       this._router.navigate([""]);
     }
-  };
+  }
 }

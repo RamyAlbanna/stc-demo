@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   setDataSource = () =>
     this._subscription.add(
-      this._productsService.getAll().subscribe({
+      this._productsService.getAllProducts().subscribe({
         next: (response) => {
           this.dataSource = response;
         },
@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onProductDeleted = (id: number) =>
     this._subscription.add(
-      this._productsService.delete(id).subscribe({
+      this._productsService.deleteProduct(id).subscribe({
         next: (response) => {
           this.dataSource = this.dataSource.filter(
             (row) => row.id !== response.id

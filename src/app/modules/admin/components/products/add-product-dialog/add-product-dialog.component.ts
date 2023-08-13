@@ -31,12 +31,14 @@ export class AddProductDialogComponent {
 
   onProductAdded = () => {
     this._subscription.add(
-      this._productsService.add(this.addProuctForm.value).subscribe(() => {
-        this._dialogRef.close();
-        this._toaster.success("Product Added Successfully!", "", {
-          timeOut: 2000,
-        });
-      })
+      this._productsService
+        .addProduct(this.addProuctForm.value)
+        .subscribe(() => {
+          this._dialogRef.close();
+          this._toaster.success("Product Added Successfully!", "", {
+            timeOut: 2000,
+          });
+        })
     );
   };
 

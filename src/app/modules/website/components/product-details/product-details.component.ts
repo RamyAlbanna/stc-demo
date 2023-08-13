@@ -13,15 +13,17 @@ import { ProductsService } from "src/app/core/services/products.service";
   styleUrls: ["./product-details.component.scss"],
 })
 export class ProductDetailsComponent {
-  private readonly _productsService = inject(ProductsService);
-  private readonly _cartsService = inject(CartsService);
-  private readonly _activatedRouteService = inject(ActivatedRoute);
-  private readonly _router = inject(Router);
-  private readonly _toaster = inject(ToastrService);
-
   private _subscription: Subscription = new Subscription();
   productDetails!: ProductModel;
   qty = new FormControl(1);
+
+  constructor(
+    private readonly _productsService: ProductsService,
+    private readonly _cartsService: CartsService,
+    private readonly _activatedRouteService: ActivatedRoute,
+    private readonly _router: Router,
+    private readonly _toaster: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this._activatedRouteService.paramMap.subscribe({
@@ -33,7 +35,7 @@ export class ProductDetailsComponent {
 
   setProductDetails = (id: number) =>
     this._subscription.add(
-      this._productsService.getOne(id).subscribe({
+      this._productsService.getOneProduct(id).subscribe({
         next: (response) => {
           this.productDetails = response;
           this.productDetails.qty = 0;
