@@ -13,8 +13,10 @@ import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
-  private readonly _loadingService = inject(LoadingService);
-  private readonly _toasterService = inject(ToastrService);
+  constructor(
+    private readonly _loadingService: LoadingService,
+    private readonly _toasterService: ToastrService
+  ) {}
 
   intercept(request: any, next: HttpHandler): Observable<HttpEvent<any>> {
     this._loadingService.showSpinner();

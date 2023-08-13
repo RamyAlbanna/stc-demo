@@ -28,7 +28,7 @@ export class ShopComponent implements OnInit, OnDestroy {
     this.setProductsList();
   }
 
-  setProductsList = () =>
+  setProductsList() {
     this._subscription.add(
       this._productsService.getAllProducts().subscribe({
         next: (response) => {
@@ -36,8 +36,9 @@ export class ShopComponent implements OnInit, OnDestroy {
         },
       })
     );
+  }
 
-  setCategories = () =>
+  setCategories() {
     this._subscription.add(
       this._categoriesService.getAllCategories().subscribe({
         next: (response) => {
@@ -46,8 +47,9 @@ export class ShopComponent implements OnInit, OnDestroy {
         },
       })
     );
+  }
 
-  onCategoryClicked = (category: string) => {
+  onCategoryClicked(category: string) {
     if (category === "all") {
       this.setProductsList();
       return;
@@ -58,10 +60,13 @@ export class ShopComponent implements OnInit, OnDestroy {
         this.productsList = response;
       },
     });
-  };
+  }
 
-  navigateToDetails = (id: number) =>
+  navigateToDetails(id: number) {
     this._router.navigate(["product-details", id]);
+  }
 
-  ngOnDestroy = () => this._subscription.unsubscribe();
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
+  }
 }

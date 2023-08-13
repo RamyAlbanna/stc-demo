@@ -7,6 +7,10 @@ import { BehaviorSubject } from "rxjs";
 export class LoadingService {
   loadingStatus$ = new BehaviorSubject(false);
 
-  showSpinner = () => this.loadingStatus$.next(true);
-  hideSpinner = () => this.loadingStatus$.next(false);
+  showSpinner() {
+    this.loadingStatus$.next(true);
+  }
+  hideSpinner() {
+    this.loadingStatus$.next(false);
+  }
 }

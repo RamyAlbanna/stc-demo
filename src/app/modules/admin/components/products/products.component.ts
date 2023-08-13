@@ -12,11 +12,14 @@ import { ProductModel } from "src/app/core/models/products.model";
   styleUrls: ["./products.component.scss"],
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-  private readonly _productsService = inject(ProductsService);
-  private readonly _dialogService = inject(MatDialog);
-  private readonly _toaster = inject(ToastrService);
   private _subscription: Subscription = new Subscription();
   dataSource!: ProductModel[];
+
+  constructor(
+    private readonly _productsService: ProductsService,
+    private readonly _dialogService: MatDialog,
+    private readonly _toaster: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.setDataSource();

@@ -12,10 +12,9 @@ import { LoadingService } from "./core/services/loading.service";
   styles: [],
 })
 export class AppComponent implements AfterViewInit {
-  //dependencies
-  private readonly _loadingService = inject(LoadingService);
-
   showLoading = false;
+
+  constructor(private readonly _loadingService: LoadingService) {}
   ngAfterViewInit(): void {
     this._loadingService.loadingStatus$.subscribe((res) => {
       this.showLoading = res;

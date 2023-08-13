@@ -11,13 +11,15 @@ import { ProductsService } from "src/app/core/services/products.service";
   styleUrls: ["./add-product-dialog.component.scss"],
 })
 export class AddProductDialogComponent {
-  private readonly _dialogRef = inject(MatDialogRef<AddProductDialogComponent>);
-  private readonly _productsService = inject(ProductsService);
-  private readonly _toaster = inject(ToastrService);
   private _subscription: Subscription = new Subscription();
   addProuctForm!: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private readonly _dialogRef: MatDialogRef<AddProductDialogComponent>,
+    private readonly _productsService: ProductsService,
+    private readonly _toaster: ToastrService
+  ) {}
 
   ngOnInit() {
     this.addProuctForm = new FormGroup({
@@ -29,7 +31,7 @@ export class AddProductDialogComponent {
     });
   }
 
-  onProductAdded = () => {
+  onProductAdded() {
     this._subscription.add(
       this._productsService
         .addProduct(this.addProuctForm.value)
@@ -40,7 +42,9 @@ export class AddProductDialogComponent {
           });
         })
     );
-  };
+  }
 
-  ngOnDestroy = () => this._subscription.unsubscribe();
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
+  }
 }

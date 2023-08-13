@@ -7,7 +7,7 @@ import {
 } from "@angular/router";
 @Injectable({ providedIn: "root" })
 export class AuthGuard implements CanActivate {
-  private readonly _router = inject(Router);
+  constructor(private readonly _router: Router) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (
       state.url.includes("admin") &&

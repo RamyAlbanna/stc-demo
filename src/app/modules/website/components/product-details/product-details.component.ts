@@ -27,7 +27,7 @@ export class ProductDetailsComponent {
     private cartStore: Store<CartState>
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this._activatedRouteService.paramMap.subscribe({
       next: (params) => {
         this.setProductDetails(+params.get("id")!);
@@ -35,7 +35,7 @@ export class ProductDetailsComponent {
     });
   }
 
-  setProductDetails = (id: number) =>
+  setProductDetails(id: number) {
     this._subscription.add(
       this._productsService.getOneProduct(id).subscribe({
         next: (response) => {
@@ -44,6 +44,7 @@ export class ProductDetailsComponent {
         },
       })
     );
+  }
 
   onAddedToCart() {
     if (!this.qty.value!) {
@@ -64,11 +65,15 @@ export class ProductDetailsComponent {
     this._router.navigate([""]);
   }
 
-  onAddOne = () => this.qty.setValue(this.qty.value! + 1);
+  onAddOne() {
+    this.qty.setValue(this.qty.value! + 1);
+  }
 
-  onRemoveOne = () => {
+  onRemoveOne() {
     if (this.qty.value! !== 0) this.qty.setValue(this.qty.value! - 1);
-  };
+  }
 
-  ngOnDestroy = () => this._subscription.unsubscribe();
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
+  }
 }

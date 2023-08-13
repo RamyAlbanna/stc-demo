@@ -11,23 +11,17 @@ import * as cartSelectors from "src/app/store/cart-store/cart.selectors";
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"],
 })
-export class WebsiteHeaderComponent implements OnInit, OnDestroy {
-  constructor(
-    readonly _usersService: UsersService,
-    private readonly _store: Store<CartState>
-  ) {}
-
+export class WebsiteHeaderComponent implements OnDestroy {
   products$ = this._store.select(cartSelectors.getProducts);
   totalPrice$ = this._store.select(cartSelectors.getTotalPrice);
   totalQty$ = this._store.select(cartSelectors.getTotalQty);
   subscription: Subscription = new Subscription();
   cartData!: CartModel;
 
-  ngOnInit(): void {
-    this.setCartData();
-  }
-
-  setCartData() {}
+  constructor(
+    readonly _usersService: UsersService,
+    private readonly _store: Store<CartState>
+  ) {}
 
   onSignInOrOut() {
     if (this._usersService.isUserSignedIn()) {

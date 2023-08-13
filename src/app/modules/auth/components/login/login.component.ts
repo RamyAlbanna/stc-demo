@@ -10,11 +10,13 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  private readonly _router = inject(Router);
-  private readonly _toaster = inject(ToastrService);
-
   loginForm!: FormGroup;
   subscription: Subscription = new Subscription();
+
+  constructor(
+    private readonly _router: Router,
+    private readonly _toaster: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
