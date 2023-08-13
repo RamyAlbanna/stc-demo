@@ -1,0 +1,76 @@
+<header id="sticky-menu" class="header header-2">
+  <div class="header-area">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 offset-md-4 col-7">
+          <div class="logo text-md-center">
+            <h2>Demo</h2>
+          </div>
+        </div>
+        <div class="col-md-4 col-5">
+          <div class="mini-cart text-end">
+            <ul>
+              <li>
+                <a class="cart-icon" href="#">
+                  <img
+                    src="assets/img/cart/shopping-cart.png"
+                    width="30px"
+                    height="30px"
+                    alt=""
+                  />
+                  <span>{{ cartData?.totalQty }}</span>
+                </a>
+                <div class="mini-cart-brief text-left">
+                  <div class="all-cart-product clearfix">
+                    <div class="single-cart clearfix">
+                      <div class="cart-photo">
+                        <a href="#"><img src="img/cart/1.jpg" alt="" /></a>
+                      </div>
+                      <div class="cart-info">
+                        <h5><a href="#">dummy product name</a></h5>
+                        <p class="mb-0">Price : $ 100.00</p>
+                        <p class="mb-0">Qty : 02</p>
+                        <span class="cart-delete"
+                          ><a href="#"><i class="zmdi zmdi-close"></i></a
+                        ></span>
+                      </div>
+                    </div>
+                    <div class="single-cart clearfix">
+                      <div class="cart-photo">
+                        <a href="#"><img src="img/cart/2.jpg" alt="" /></a>
+                      </div>
+                      <div class="cart-info">
+                        <h5><a href="#">dummy product name</a></h5>
+                        <p class="mb-0">Price : $ 300.00</p>
+                        <p class="mb-0">Qty : 01</p>
+                        <span class="cart-delete"
+                          ><a href="#"><i class="zmdi zmdi-close"></i></a
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="cart-totals d-flex justify-content-between align-content-center"
+                  >
+                    <h5 class="mb-0 mt-3">
+                      Total
+                      <span class="floatright">{{
+                        cartData?.totalPrice | currency
+                      }}</span>
+                    </h5>
+                    <a
+                      href="cart.html"
+                      class="button-one floatleft text-uppercase"
+                      data-text="View cart"
+                      >View cart</a
+                    >
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,52 @@
+<div class="product-area pt-80 pb-80 product-style-2">
+  <div class="container">
+    <div class="shop-content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bg-white p-3 mb-3 clearfix">
+            <div class="categories-list-wrapper">
+              <button
+                *ngFor="let category of categoriesList"
+                type="button"
+                class="d-inline-flex me-3 text-capitalize h6"
+                (click)="onCategoryClicked(category)"
+              >
+                {{ category }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-xl-3 col-md-4" *ngFor="let product of productsList">
+              <div
+                class="single-product"
+                (click)="navigateToDetails(product?.id!)"
+              >
+                <div class="product-img">
+                  <span class="pro-label new-label">{{
+                    product?.category
+                  }}</span>
+
+                  <img [src]="product?.image" alt="" />
+                </div>
+                <div class="product-info clearfix">
+                  <div class="fix">
+                    <h4 class="post-title floatleft">
+                      {{ product?.title }}
+                    </h4>
+                  </div>
+                  <div class="fix">
+                    <span class="pro-price floatleft">
+                      {{ product?.price }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

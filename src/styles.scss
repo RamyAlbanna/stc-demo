@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+@import "assets/css/animate.scss";
+@import "assets/css/lightbox.scss";
+@import "assets/css/default.scss";
+@import "assets/css/shortcode.scss";
+@import "assets/css/style.scss";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+:root {
+  --primaryColor: #c8a165;
+  --primaryColorDark: #ac8549;
+}
+
+html,
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  a,
+  a:hover,
+  a:visited,
+  a:active,
+  a:link {
+    text-decoration: none;
+  }
+}
+
+mat-card {
+  max-width: 1200px;
+  border-radius: 20px !important;
+  margin: 2em auto;
+  box-shadow: 0px 5px 15px 3px rgba(110, 113, 145, 0.16) !important;
+
+  table {
+    margin-top: 20px;
+  }
+}
+
+form {
+  padding: 30px;
+  border-radius: 30px;
+
+  mat-form-field {
+    display: block !important;
+  }
+
+  input[type="password"] {
+    background: round;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.admin-wrapper {
+  background: #f6f6f6;
+
+  .header-wrapper {
+    .top_bar {
+      background: #fff !important;
+      box-shadow: 0 0 15px #e4e4e4;
+    }
+  }
+
+  .btn {
+    border-radius: 8px;
+  }
+
+  // c8a165
+
+  .btn-primary {
+    background-color: var(--primaryColor);
+    border-color: var(--primaryColor);
+
+    &:hover,
+    :active {
+      background-color: var(--primaryColorDark);
+      border-color: var(--primaryColorDark);
+    }
+  }
+}

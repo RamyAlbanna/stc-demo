@@ -1,0 +1,27 @@
+<form [formGroup]="addProuctForm">
+  <h2>Add Product</h2>
+  <mat-form-field>
+    <input matInput placeholder="Title" formControlName="title" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Description" formControlName="description" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Price" formControlName="price" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Category" formControlName="category" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Image" formControlName="image" />
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="addProuctForm.invalid"
+    type="button"
+    (click)="onProductAdded()"
+  >
+    Save
+  </button>
+</form>
