@@ -1,11 +1,13 @@
-import { Component, inject } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Store } from "@ngrx/store";
 import { ToastrService } from "ngx-toastr";
 import { Subscription } from "rxjs";
 import { ProductModel } from "src/app/core/models/products.model";
-import { CartsService } from "src/app/core/services/carts.service";
 import { ProductsService } from "src/app/core/services/products.service";
+import { CartState } from "src/app/store/cart-store/cart.reducer";
+import * as cartActions from "src/app/store/cart-store/cart.actions";
 
 @Component({
   selector: "app-product-details",
@@ -19,10 +21,10 @@ export class ProductDetailsComponent {
 
   constructor(
     private readonly _productsService: ProductsService,
-    private readonly _cartsService: CartsService,
     private readonly _activatedRouteService: ActivatedRoute,
     private readonly _router: Router,
-    private readonly _toaster: ToastrService
+    private readonly _toaster: ToastrService,
+    private cartStore: Store<CartState>
   ) {}
 
   ngOnInit(): void {
@@ -43,31 +45,24 @@ export class ProductDetailsComponent {
       })
     );
 
-  prepareProductToAdd = () => {
-    const productFound = this._cartsService.cartData.products.find(
-      (row) => row.id === this.productDetails.id
-    );
-    this._cartsService.cartData.totalPrice += this.productDetails.price;
-    this._cartsService.cartData.totalQty += this.qty.value!;
-    if (productFound) productFound.qty += this.qty.value!;
-    else {
-      this.productDetails.qty += this.qty.value!;
-      this._cartsService.cartData.products.push(this.productDetails);
-    }
-  };
-
-  onAddedToCart = () => {
+  onAddedToCart() {
     if (!this.qty.value!) {
       this._toaster.warning("Please insert a quantity!", "", {
         timeOut: 2000,
       });
       return;
     }
-    this.prepareProductToAdd();
-    this._cartsService.addToCart(this._cartsService.cartData);
+    this.productDetails.qty = this.qty.value!;
+    this.cartStore.dispatch(
+      cartActions.addToCart({
+        cartData: {
+          product: this.productDetails,
+        },
+      })
+    );
     this._toaster.success("Added to Cart Successfully!", "", { timeOut: 2000 });
     this._router.navigate([""]);
-  };
+  }
 
   onAddOne = () => this.qty.setValue(this.qty.value! + 1);
 

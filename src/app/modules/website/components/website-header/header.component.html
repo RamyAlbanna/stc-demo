@@ -22,13 +22,13 @@
                     height="30px"
                     alt=""
                   />
-                  <span>{{ cartData?.totalQty }}</span>
+                  <span>{{ totalQty$ | async }}</span>
                 </a>
                 <div class="mini-cart-brief text-left">
                   <div class="all-cart-product clearfix">
                     <div
                       class="single-cart clearfix"
-                      *ngFor="let cartProduct of cartData?.products"
+                      *ngFor="let cartProduct of products$ | async"
                     >
                       <div class="cart-photo">
                         <img [src]="cartProduct?.image" alt="" />
@@ -44,12 +44,12 @@
                   </div>
 
                   <div class="cart-totals text-center">
-                    <h5 class="mb-0" *ngIf="!cartData?.products?.length">
+                    <h5 class="mb-0" *ngIf="!(products$ | async)?.length">
                       <span>There is no items yet!</span>
                     </h5>
                     <h5 class="mb-0 mt-3">
                       Total:
-                      <span>{{ cartData?.totalPrice | currency }}</span>
+                      <span>{{ totalPrice$ | async | currency }}</span>
                     </h5>
                   </div>
                 </div>

@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.setDataSource();
   }
 
-  setDataSource = () =>
+  setDataSource() {
     this._subscription.add(
       this._productsService.getAllProducts().subscribe({
         next: (response) => {
@@ -30,16 +30,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
         },
       })
     );
+  }
 
-  openDialog = () =>
+  openDialog() {
     this._dialogService.open(AddProductDialogComponent, {
       width: "750px",
       height: "600px",
     });
+  }
 
-  onProductAdded = () => this.openDialog();
+  onProductAdded() {
+    this.openDialog();
+  }
 
-  onProductDeleted = (id: number) =>
+  onProductDeleted(id: number) {
     this._subscription.add(
       this._productsService.deleteProduct(id).subscribe({
         next: (response) => {
@@ -52,6 +56,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
         },
       })
     );
+  }
 
-  ngOnDestroy = () => this._subscription.unsubscribe();
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
+  }
 }

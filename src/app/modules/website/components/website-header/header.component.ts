@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit, inject } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
-import { Router } from "@angular/router";
-import { CartsService } from "src/app/core/services/carts.service";
 import { CartModel } from "src/app/core/models/carts.model";
 import { UsersService } from "src/app/core/services/users.service";
+import { CartState } from "src/app/store/cart-store/cart.reducer";
+import * as cartSelectors from "src/app/store/cart-store/cart.selectors";
 
 @Component({
   selector: "app-website-header",
@@ -12,11 +13,13 @@ import { UsersService } from "src/app/core/services/users.service";
 })
 export class WebsiteHeaderComponent implements OnInit, OnDestroy {
   constructor(
-    private readonly _cartsService: CartsService,
     readonly _usersService: UsersService,
-    private readonly _router: Router
+    private readonly _store: Store<CartState>
   ) {}
 
+  products$ = this._store.select(cartSelectors.getProducts);
+  totalPrice$ = this._store.select(cartSelectors.getTotalPrice);
+  totalQty$ = this._store.select(cartSelectors.getTotalQty);
   subscription: Subscription = new Subscription();
   cartData!: CartModel;
 
@@ -24,13 +27,7 @@ export class WebsiteHeaderComponent implements OnInit, OnDestroy {
     this.setCartData();
   }
 
-  setCartData() {
-    this.subscription.add(
-      this._cartsService.cartDataSubject$.subscribe({
-        next: (cart: CartModel) => (this.cartData = cart),
-      })
-    );
-  }
+  setCartData() {}
 
   onSignInOrOut() {
     if (this._usersService.isUserSignedIn()) {
