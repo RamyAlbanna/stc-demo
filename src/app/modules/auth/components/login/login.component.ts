@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onLogin = () => {
+  onLogin() {
     if (!this.isUserValid()) {
       this._toaster.error("Invalid Credintials!", "", { timeOut: 2000 });
       return;
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this._toaster.success("User Successfully Logged in!", "", {
       timeOut: 2000,
     });
-  };
+  }
 
   getFormControl = (controlName: string): FormControl =>
     this.loginForm.controls[controlName] as FormControl;

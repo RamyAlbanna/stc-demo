@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Subscription } from "rxjs";
@@ -19,8 +19,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   constructor(
     private readonly _productsService: ProductsService,
     private readonly _categoriesService: CategoriesService,
-    private readonly _router: Router,
-    private readonly _toaster: ToastrService
+    private readonly _router: Router
   ) {}
 
   ngOnInit(): void {

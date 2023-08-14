@@ -8,8 +8,8 @@ import * as cartSelectors from "src/app/store/cart-store/cart.selectors";
 
 @Component({
   selector: "app-website-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"],
+  templateUrl: "./website-header.component.html",
+  styleUrls: ["./website-header.component.scss"],
 })
 export class WebsiteHeaderComponent implements OnDestroy {
   products$ = this._store.select(cartSelectors.getProducts);

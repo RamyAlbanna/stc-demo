@@ -1,9 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  inject,
-} from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component } from "@angular/core";
 import { LoadingService } from "./core/services/loading.service";
 
 @Component({
@@ -14,10 +9,14 @@ import { LoadingService } from "./core/services/loading.service";
 export class AppComponent implements AfterViewInit {
   showLoading = false;
 
-  constructor(private readonly _loadingService: LoadingService) {}
+  constructor(
+    private readonly _loadingService: LoadingService,
+    private cdr: ChangeDetectorRef
+  ) {}
   ngAfterViewInit(): void {
     this._loadingService.loadingStatus$.subscribe((res) => {
       this.showLoading = res;
+      this.cdr.detectChanges();
     });
   }
 }

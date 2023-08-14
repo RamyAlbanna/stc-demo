@@ -5,14 +5,12 @@ import * as cartActions from "./cart.actions";
 export const CART_FEATURE_KEY = "cart";
 
 export interface CartState {
-  id: number;
   totalQty: number;
   totalPrice: number;
   products: ProductModel[];
 }
 
 const initialState: CartState = {
-  id: 1,
   totalPrice: 0,
   totalQty: 0,
   products: [],
