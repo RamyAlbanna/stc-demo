@@ -14,4 +14,4 @@
 
 - filter by category is working fine.
 
-- shopping cart is implemented using rxjs (client side only), api isn't working well.
+- state management technology in shopping cart (client side only), api isn't working well.
